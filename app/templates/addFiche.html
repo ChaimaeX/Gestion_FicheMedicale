@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+<br><br><br>
+<!-- il ya un problem quand je remove total il va reste vide -->
+<h1 class="text-capitalize text-center mx-10 bg-dark text-white" > Enregistrer une nouvelle fiche medicale </h1>
+<br>
+<form method="post">
+
+    {% csrf_token %}
+        
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="client"> Nom </label>
+            <input required name="client" type="text" class="form-control" id="client-1"  placeholder="Nom">
+    
+        </div>
+        <div class="form-group col-md-6">
+            <label for="client"> Adresse </label>
+            <input required name="adresse" type="text" class="form-control" id="client-1"  placeholder="Adresse">
+    
+        </div>
+        <div class="form-group col-md-3">
+            <label for="client"> Tel </label>
+            <input required name="tel" type="text" class="form-control"  placeholder="ex: 06 ..">
+            
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label for="client"> Observations </label>
+            <input  name="Observations" type="text" class="form-control"  placeholder="observations">
+            
+        </div>
+    </div>
+   
+    
+<br><br>
+    <div id="wrapper">
+
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label for="date"># 1 Item </label>
+                <input type="date" required class="form-control" name="date" >
+                
+            </div>
+            
+            <div class="form-group col-md-1">
+                <label for="dent"> Dent </label>
+                <input  name="dent"   type="text" class="form-control"   placeholder="dent">
+               
+            </div>
+
+            <div class="form-group col-md-8">
+                <label for="actes"> Actes </label>
+                <input required name="actes" type="text" class="form-control" id="qty-1"  placeholder="actes">
+            </div>
+
+
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="honoraires"> Honoraires </label>
+                <input  name="honoraires" type="text"   class="form-control"  placeholder="honoraires">
+            </div>
+
+        
+            <div class="form-group col-md-4">
+                <label for="recu"> Reçu </label>
+                <input  type="text" required name="recu" class="form-control" placeholder="reçu">
+            </div>
+
+            <div class="form-group col-md-4">
+             <label for="rste"> Reste à payé </label>
+             <input  type="text" name="reste"  class="form-control" id="reste" placeholder="reste à payé ">
+            </div>
+        </div>
+    </div>
+
+      
+     <br><br><br>
+    <button type="submit" class="btn btn-primary" > Save </button>
+   
+</form>
+  
+<br><br>
+
+<div class="row addRemove" style="display: flex; justify-content: space-between;">
+
+    <button id="btn-add" onclick="Add()" class="btn btn-outline-danger w-30 col-md-4"> ajouter un nouvel élément </button>
+    
+    <button id="btn-remove" onclick="remove()"  class="btn btn-outline-warning w-30 col-md-4"> supprimer le dernier élément </button>
+
+</div>
+
+
+<br><br><br><br>
+
+<script type="text/javascript">
+
+    Add = function() {
+        console.log('chaimae')
+       
+         let number = $('#wrapper').children().length ;
+         
+         formAdd = `
+               
+            <div class="form-row">
+            <div class="form-group col-md-3">
+                <label for="date">#${number} Item </label>
+                <input type="date" required class="form-control" name="date">
+                
+            </div>
+            
+            <div class="form-group col-md-1">
+                <label for="dent"> Dent </label>
+                <input  name="dent"  type="text" class="form-control"  placeholder="dent">
+               
+            </div>
+
+            <div class="form-group col-md-8">
+                <label for="actes"> Actes </label>
+                <input required name="actes" type="text" class="form-control"   placeholder="actes">
+            </div>
+
+
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="honoraires"> Honoraires </label>
+                <input name="honoraires" type="text"   class="form-control"  placeholder="honoraires">
+            </div>
+
+        
+            <div class="form-group col-md-4">
+                <label for="recu"> Reçu </label>
+                <input  type="text" required name="recu" class="form-control" placeholder="reçu">
+            </div>
+
+            <div class="form-group col-md-4">
+             <label for="reste"> Reste à payé </label>
+             <input  type="text" name="reste"  class="form-control" id="reste" placeholder="reste à payé ">
+            </div>
+        </div>
+            
+          
+                    `;   
+                                   
+        
+        $("#wrapper:last").append(formAdd);      
+      
+    }
+    // remove last item line
+    remove = function() {
+    
+    if ($('#wrapper').children().length > 2) {
+        // Remove the last two children
+        $('#wrapper').children().slice(-2).remove();
+
+        // Optional: Log the updated number of children after removal
+        let numLeft = $('#wrapper').children().length;
+        console.log("Number of elements left:", numLeft);
+    } else {
+        // Handle case where there are fewer than two children
+        console.log("There are fewer than two elements to remove.");
+    }
+}
+   
+    </script>
+   
+
+    
+{% endblock content %}
+

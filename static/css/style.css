@@ -1,0 +1,89 @@
+*{
+    text-decoration: none;
+}
+
+    /* table th{
+    color: #70a0ff;
+}
+
+.navIcon {
+    position: relative;
+   
+}
+.navIcon i{
+    position: absolute;
+    right: 50px;
+    top: 50%;
+    font-size: 24px;
+    transform: translateY(-50%);
+} */
+.invoice-logo{
+    margin: 7px;
+}
+.invoice-details {
+    float: right; /* Aligner le div à droite */
+    clear: both; /* Assurer que le div ne chevauche pas d'autres éléments flottants */
+    padding: 15px 20px;
+    margin: 20px;
+    border: 3px solid rgb(63, 197, 47);
+    border-radius: 20px;
+    
+}
+.container{
+    text-align: left;
+}
+.custom-table {
+    border: 1px solid #2b3958;
+}
+
+.custom-table thead th {
+    border: 1px solid black;
+    color: #000;
+   
+}
+.custom-table > tbody tr:hover {
+    background: #d8e9c5;
+}
+/* .custom-table > tbody tr:nth-of-type(even) {
+    background-color: #1a243a;
+} */
+.custom-table > tbody td {
+    border: 1px solid #2e3d5f;
+}
+
+.table {
+    /* background: #1a243a;
+    color: #bcd0f7; */
+    font-size: .75rem;
+    margin: 0 10px;
+}
+/* .text-success {
+    color: #c0d64a !important;
+} */
+.custom-actions-btns {
+    margin: auto;
+    display: flex;
+    justify-content: flex-end;
+}
+.custom-actions-btns .btn {
+    margin: .3rem 0 .3rem .3rem;
+}
+.footer{
+    display: flex;
+    justify-content: space-between;
+}
+.first-letter-bold {
+  font-weight: bold;
+}
+.first-letter-bold::first-letter {
+  font-weight: bold;
+}
+
+.flex{
+    display: flex;
+    
+}
+td{
+    font-size: 15px;
+}
+

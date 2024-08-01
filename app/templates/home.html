@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<br><br>
+
+<style>
+   a{
+      text-decoration: none;
+   }
+</style>
+   
+<div class="form-group ">
+    <input id="search" class="form-control" type="text" placeholder="Search....">
+  </div>
+    <a class="btn btn-primary" style="float: right; border-radius: 50px; width: 12%; margin-bottom: 20px;" href="{% url 'add' %}"><i class='bx bxs-file-plus' style="padding-right: 4px;"></i>Nouveau </a> 
+  <div>
+    <table class="table table-striped-colums">
+     
+      <thead>
+         <tr>
+             <th>#</th>
+             <th>NOM</th>
+             <th>Adresse</th>
+             <th>Tel</th>
+             <th>Action</th>
+         </tr>
+     </thead>
+     
+       <tbody id="myTable" style="color: #0000FF;">
+        {% if clients %}
+        {% for client in clients %}
+        <tr>
+           <td scope="row">{{ client.pk }}</td>
+           <td>{{client.nom}}</td>
+           <td>{{client.adresse}}</td>
+           <td>{{client.tel }}</td>
+           
+           <td>
+          
+              <a href="{% url 'view' pk=client.pk  %}" title="Detail" class="badge text-white bg-success m-30">Voir</a>
+
+              <button id="btn-invoice-sup" type="button" data-toggle="modal" data-target="#supprimer"
+                 class="badge text-white bg-danger m-20" title="Supprimer" data-id="{{ client.pk }}"
+                 data-customer="">Supprimer
+              </button>
+           
+           </td>
+        </tr>
+
+        {% endfor %}
+        
+       
+
+        
+        <br> 
+            {% else %}
+            <p class="text-center text-primary">Aucune Fiche trouvée.</p>
+        <!-- <p class="text-center text-primary">Aucune element trouvée.</p> -->
+        {% endif %}
+      </tbody>
+        
+      </table>
+    </div>
+
+       
+      <!-- Modal suppression -->
+       <div class="modal fade" id="supprimer" tabindex="-1" role="dialog" aria-labelledby="sexampleModalLabel"
+       aria-hidden="true">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title text-dark" id="sexampleModalLabel">Supprimer la fiche médicale</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <form method="post">
+               {% csrf_token %}
+               <input name="id_supprimer" type="hidden" id="id_supprimer">
+               <label id="label_id_s" class="text-dark checkbox-inline"> <strong id="strong_id_s">Êtes-vous sûr(e) de vouloir supprimer la fiche ?</strong></label>
+
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                  <button type="submit" class="btn btn-danger">Supprimer</button>
+               </div>
+            </form>
+         </div>
+
+       </div>
+    </div>
+         </div>
+      <!-- end modal-->
+      <br><br>
+   <script type="text/javascript">
+
+         // modification
+      
+         $(document).on('click', '#btn-invoice-mod', function(){
+            let invoice_id = $(this).data('id');
+            console.log(invoice_id);
+            let customer = $(this).data('customer');
+            $('#id_modified').val(invoice_id);
+      
+         })
+           
+         // deleting of invoice
+      
+         $(document).on('click', '#btn-invoice-sup', function(){
+            let invoice_id = $(this).data('id');
+            let customer = $(this).data('customer');
+            $('#id_supprimer').val(invoice_id);
+            console.log(  $('#id_supprimer').val());
+         })
+      </script>
+      
+      
+      
+       <script>
+       console.log('chaimae')
+            $(document).ready(function(){
+            $("#search").on("keyup", function(){
+               var value = $(this).val().toLowerCase();
+               $("#myTable tr").filter(function(){
+                  $(this).toggle($(this).text().toLocaleLowerCase().indexOf(value)>-1)
+               });
+            });
+         });
+       </script>
+{% endblock content %}

@@ -1,0 +1,431 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<style>
+    /* table th{
+    color: #70a0ff;
+}
+   
+
+.navIcon {
+    position: relative;
+   
+}
+.navIcon i{
+    position: absolute;
+    right: 50px;
+    top: 50%;
+    font-size: 24px;
+    transform: translateY(-50%);
+} */
+body{
+    color: #041a4a;
+}
+.fiche-ctn{
+    margin-left: 10px;
+    margin-bottom: 15px;
+    padding: 5px;
+}
+.invoice-logo{
+    margin: 7px;
+}
+.invoice-details {
+    float: right; /* Aligner le div à droite */
+    clear: both; /* Assurer que le div ne chevauche pas d'autres éléments flottants */
+    padding: 15px 20px;
+    margin: 20px;
+    border: 3px solid rgb(63, 197, 47);
+    border-radius: 20px;
+    
+}
+.container{
+    text-align: left;
+}
+.custom-table {
+    border: 1px solid #184097;
+}
+/* .custom-table thead {
+    background: #2f71c1;
+} */
+.custom-table thead th {
+    border: 1px solid #184097;
+    color: #184097;
+    /* background-color: gainsboro; */
+}
+.custom-table > tbody tr:hover {
+    background: #d8e9c5;
+}
+/* .custom-table > tbody tr:nth-of-type(even) {
+    background-color: #1a243a;
+} */
+.custom-table > tbody td {
+    border: 1px solid #2e3d5f;
+}
+
+.table {
+    /* background: #1a243a;
+    color: #bcd0f7; */
+    font-size: .75rem;
+    margin: 0 10px;
+}
+/* .text-success {
+    color: #c0d64a !important;
+} */
+.custom-actions-btns {
+    margin: auto;
+    display: flex;
+    justify-content: flex-end;
+}
+.custom-actions-btns .btn {
+    margin: .3rem 0 .3rem .3rem;
+}
+.footer{
+    display: flex;
+    justify-content: space-between;
+}
+.first-letter-bold {
+  font-weight: bold;
+}
+.first-letter-bold::first-letter {
+  font-weight: bold;
+}
+
+.flex{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom:20px ;
+    
+}
+th{
+    text-align: center;
+}
+td{
+    font-size: 15px;
+    text-align: center;
+}
+.card{
+    color: #184097;
+}
+.fiche-ctn span{
+    font-size: 15px;
+    font-weight: bolder;
+}
+@media (min-width: 576px) {
+  .modal-dialog {
+    max-width: 1078px;
+    margin: 1.75rem auto;
+  }
+}
+
+
+</style>
+<div class="container">
+    
+    <div class="row gutters">
+    	<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="d-flex justify-content-end mb-1">
+                <button class="btn btn-primary m-10"  type="button" data-toggle="modal" data-target="#add"
+                   title="add" data-id="{{ client.pk }}" data-customer=""> <i class='bx bx-add-to-queue'></i></button>
+            </div>
+    		<div class="card " style="border-color:#ffff; background-color: #f7ff90; padding: 10px;" >
+    			<div class="card-body p-0">
+    				<div class="invoice-container">
+    					<div class="invoice-header">
+    
+    						 
+    					        <!-- Row start -->
+                                <div class="row gutters">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 flex">
+                                        <div class="invoice-logo" style="margin-left: 18px;">
+                                            <!-- img de logo -->
+                                           <h5><span style="font-family: serif; border-bottom: 1px #184097 solid;font-size: 22px;">Docteur __  __</span>
+                                           <br><span style="margin-left: 13px;">Chirurglenne Dentiste</span></h5>
+                                          
+                                        </div>
+                                        <div class="" style="margin-left: 18px;">
+                                            <!-- img de logo -->
+                                           <h7>Fiche N° {{ client.num_fiche}} / {{annee_actuelle}} </h7>
+                                          
+                                    </div>
+                                    
+                                </div>
+                                <!-- Row end -->
+
+                                  <!-- row start -->
+                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <div class="">
+                                        <div class="invoice-num">
+                                            
+                                            <div class="text-center"><span style="font-weight: inherit;font-family: serf; border-bottom: 1px; border-bottom: 1px solid #184097;">FICHE MÉDICALE</span></div>
+                                            
+                                        </div>
+                                    </div>													
+                                </div>
+                                 <!-- Row end -->
+
+
+                            <!-- les information personelle  -->
+
+                                 <!-- row start -->
+                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <div class="">
+                                        <div class="fiche-ctn">
+                                            
+                                            <div><span > Nom  :</span> {{client.nom}}  </div>
+                                            <div style="display: flex; justify-content: space-between;margin-right: 45%;">
+                                              <div><span> Adresse  :</span> {{client.adresse}}  </div>
+                                              <div ><span> Tél  :</span> {{client.tel}}</div> 
+                                              
+                                             
+                                            </div>
+                                            <div ><span>Observations : </span>{{client.Observations}} </div>
+                                            
+                                        </div>
+                                    </div>													
+                                </div>
+                                 <!-- Row end -->
+<br><br>
+                            <!-- end  -->
+                    </div>
+
+                    <div class="invoice-body">
+
+                        <!-- Row start -->
+                        <div class="row gutters">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="table-responsive">
+                                    <table class="table custom-table m-0">
+                                        <thead>
+                                            <tr>
+                                                
+                                                <th >Date</th>
+                                                <th>Dent</th>
+                                                <th>Actes</th>
+                                                <th>Honoraires</th>
+                                                <th>Reçu</th>
+                                                <th>Reste à Payé</th>
+                                                <th>Action</th>
+
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% if list %}
+                                            {% for line in list %}
+                                            <tr>
+                                            <td id="date-{{line.id}}" >{{ line.date|date:"d/m/Y" }}</td>
+                                            <td id="dent-{{line.id}}" >{{line.dent}}</td>
+                                            <td style="min-width: 400px;" id="actes-{{line.id}}">{{line.actes}}</td>
+                                            <td id="honoraires-{{line.id}}"> {{line.honoraires}} </td>
+                                            <td id="recu-{{line.id}}">{{line.recu}} </td>
+                                            <td id="reste-{{line.id}}">{{line.reste_a_paye}} </td>
+                                            <td>
+                                                <form method="post">
+                                                  <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#up"  id="btn-invoice-mod"
+                                                  title="Modifier" data-id="{{line.id}}" data-customer="" ><i class='bx bx-pencil'></i></button>
+                                                    {% csrf_token %}
+                                                    <input type="hidden" value="{{line.pk}}" name="sup" id="sup">
+                                                    <input type="hidden" value="{{client.pk}}" name="pk" id="pk">
+                                                     <button class="btn btn-primary" type="submit" title="Supprimer"><i class='bx bx-trash'></i></button> 
+                                                </form>
+                                            </td>
+                                           </tr>
+                                           {% endfor%}
+                                           {% else %}
+                                           <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                           </tr>
+                                           {% endif%}
+                                          
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Row end -->
+
+    
+    					</div>
+                          
+    				</div>
+
+                    <br><br><br>
+    
+<!-- Modal modifier -->
+<div class="modal fade" id="up" tabindex="-1" role="dialog" aria-labelledby="sexampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-dark" id="sexampleModalLabel">Modifier la fiche médicale.</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <input type="hidden" name="pk" value="{{ client.pk }}">
+                            <input name="id_modified" type="hidden" id="id_modified">
+                            <label for="produit-1"># Item </label>
+                            <input type="date" class="form-control" name="date" id="date">
+                        </div>
+
+                        <div class="form-group col-md-1">
+                            <label for="unit-1"> Dent </label>
+                            <input name="dent" type="number" class="form-control" id="dent" placeholder="dent">
+                        </div>
+
+                        <div class="form-group col-md-9">
+                            <label for="qty-1"> Actes </label>
+                            <input required name="actes" type="text" class="form-control" id="actes" placeholder="actes">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="total-a-1"> Honoraires </label>
+                            <input name="honoraires" type="text" class="form-control" id="honoraires" placeholder="honoraires">
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="total"> Reçu </label>
+                            <input type="text" required name="recu" class="form-control" id="recu" placeholder="reçu">
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="total"> Reste à paye </label>
+                            <input type="text" name="reste" class="form-control" id="reste" placeholder="reste à payer">
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-primary">Sauvegarder</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Fin modal modifier -->
+    <!-- Modal ajouter -->
+       <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="sexampleModalLabel"
+       aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title text-dark" id="sexampleModalLabel">Ajouter une nouvelle ligne à la fiche médicale.</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <form method="post">
+               {% csrf_token %}
+               <div class="form-row">
+                <div class="form-group col-md-2">
+                    <input type="hidden" name="pk" value="{{client.pk}}">
+                   
+                    <label for="produit-1"># Item </label>
+                    <input type="date" class="form-control" name="date" id="date">
+                 
+                </div>
+                
+                <div class="form-group col-md-1">
+                    <label for="unit-1"> Dent </label>
+                    <input  name="dent"  type="number" class="form-control" id="dent"  placeholder="dent">
+                   
+                </div>
+    
+                <div class="form-group col-md-9">
+                    <label for="qty-1"> Actes </label>
+                    <input required name="actes" type="text" class="form-control" id="actes"  placeholder="actes">
+                </div>
+    
+    
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="total-a-1"> Honoraires </label>
+                    <input  name="honoraires" type="text"   class="form-control" id="honoraires" placeholder="honoraires">
+                </div>
+    
+            
+                <div class="form-group col-md-4">
+                    <label for="total"> Reçu </label>
+                    <input  type="text" required name="recu" class="form-control" placeholder="reçu">
+                </div>
+    
+                <div class="form-group col-md-4">
+                 <label for="total"> Reste à paye </label>
+                 <input  type="text" name="reste"  class="form-control" id="reste" placeholder="reste à paye ">
+                </div>
+            </div>
+        </div>
+    
+          
+         <br><br><br>
+        
+       
+    
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                  <button type="submit" class="btn btn-primary">Save</button>
+               </div>
+            </form>
+         </div>
+
+       </div>
+    </div>
+         </div>
+      <!-- end modal-->
+        
+        <br><br>
+    			</div>
+
+    		</div>
+            
+            <br>
+    	</div>
+    </div>
+</div>
+
+<script>
+ $(document).on('click', '#btn-invoice-mod', function(){
+    let fich_id = $(this).data('id');
+    console.log("Invoice ID:", fich_id);
+    
+    $('#id_modified').val(fich_id); 
+   
+    let date = $(`#date-${fich_id}`).text();
+    let dent = $(`#dent-${fich_id}`).text();
+    let actes = $(`#actes-${fich_id}`).text();
+    let honoraires = $(`#honoraires-${fich_id}`).text();
+    let recu = $(`#recu-${fich_id}`).text();
+    let reste = $(`#reste-${fich_id}`).text();
+
+    let dateText = $(`#date-${fich_id}`).text().trim();  // Fetching and trimming the date text
+    let dateParts = dateText.split('/');  // Assuming your date is in DD/MM/YYYY format, adjust this split accordingly
+    if (dateParts.length === 3) {
+        // Create a Date object from parts (month is 0-indexed in JavaScript Date)
+        let dateObject = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]);
+        let formattedDate = dateObject.toISOString().split('T')[0];  // ISO string format (YYYY-MM-DD)
+        $('#date').val(formattedDate);  // Assign formatted date to the date input
+    }
+
+    $('#dent').val(dent);
+    $('#actes').val(actes);
+    $('#honoraires').val(honoraires);
+    $('#recu').val(recu);
+    $('#reste').val(reste);
+});
+
+
+</script>
+{% endblock content %}
